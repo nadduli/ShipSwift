@@ -1,13 +1,18 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2"
+	"log"
+
+	"github.com/nadduli/ShipSwift/config"
+	"github.com/nadduli/ShipSwift/internal/api"
 )
 
 func main() {
+	cfg, err := config.SetupEnv()
 
-	app := fiber.New()
+	if err != nil {
+		log.Fatalf("config file is not loaded successfully %v\n", err)
+	}
 
-	app.Listen("localhost:9000")
-
+	api.StartServer(cfg)
 }
